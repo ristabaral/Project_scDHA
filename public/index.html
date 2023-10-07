@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My project</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;   
+            justify-content: center;        
+            align-items: center;
+            height: 100vh;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+        <label for="dataSelection">Select data source:</label>
+        <select name="dataSelection" id="dataSelection" placeholder="Make a selection">
+            <option value="" disabled selected>Make a Selection</option>
+            <option value="upload">Upload a TSV file</option>
+            <option value="builtin">Select a built-in dataset</option>
+        </select>
+        </div>
+               
+
+   
+
+        <div id="uploadSection"  style="display: none;">
+            <form action="/uploadfile" method ="POST" enctype="multipart/form-data">
+            <label for="file">Select a TSV file:</label>
+            <input type="file" name="file" id="file" accept=".tsv">
+            <br>
+            <input type="submit" value="Submit">
+            </form>
+        </div>
+
+        <div id="builtinSection"  style="display: none;">
+            <form action="/load-dataset" method ="POST" enctype="multipart/form-data">
+            <label for="dataset">Select a built-in dataset:</label>
+                     
+                <select name="dataset" id="dataset">
+                    <option value="" disabled selected>Select a dataset</option>
+                    <option type="file" value="Goolam.rda">Goolam Dataset</option>
+                </select>
+           
+            <br>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
+    </div>
+    
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const dataSelection = document.getElementById('dataSelection');
+    const uploadSection = document.getElementById('uploadSection');
+    const builtinSection = document.getElementById('builtinSection');
+
+    dataSelection.addEventListener('change', () => {
+        if (dataSelection.value === 'upload') {
+            uploadSection.style.display = 'block';
+            builtinSection.style.display = 'none';
+        } else if (dataSelection.value === 'builtin') {
+            uploadSection.style.display = 'none';
+            builtinSection.style.display = 'block';
+        }
+    });
+});
+    </script>
+
+    
+</body>
+</html>

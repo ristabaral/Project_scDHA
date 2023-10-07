@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My project</title>
+    <style>
+      /* Reset some default margin and padding for consistency */
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+      /* Create a container for the left half */
+      .left-content {
+          width: 50%;
+          float: left;
+          background-color: #f0f0f0; /* Set background color for left container */
+          height: 100vh; /* Make the container fill the full viewport height */
+      }
+      /* Create a container for the right half */
+      .right-content{
+          width: 50%;
+          float: left;
+          background-color: #f1e8e8; /* Set background color for right container */
+          height: 100vh; /* Make the container fill the full viewport height */
+      }
+        
+    </style>
+</head>
+<body>
+  <div id="output">
+    <div class="left-content">
+     <h2>Scatter Plot</h2>
+    <!-- Add scatter plot image here -->
+     <!-- Display the image using the image URL -->
+     <img id="image" height="450" width="500" src="/images/myplot.png" alt="Plot Image">
+     <!-- Add a download link for the image -->
+     
+     <form  action="/downloadplot" method="GET">
+     <label for="height">Height:</label>
+    <input type="number" id="height" name="height" value="">
+    <br>
+    <label for="width">Width:</label>
+    <input type="number" id="width" name="width" value="">
+    <br>
+    <label for="filename">Filename:</label>
+    <input type="text" id="filename" name="filename" value="">
+     <button id="downloadButton" style="background-color: rgb(17, 14, 238); color: white;">Download Image</button>
+     </form>
+     </div>
+     <div class="right-content">
+    <h2>Result Table with CellId and Cluster Number</h2>
+    <a href="/downloadtable" download>Download Table</a>
+    <h2>Compressed data of the input in TSV format</h2>
+    <a href="/downloadcompressdata" download>Download Table</a>
+    </div>    
+    
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const downloadButton = document.getElementById('downloadButton');
+  
+    downloadButton.addEventListener('click', () => {
+      const height = document.getElementById('height').value;
+      const width = document.getElementById('width').value;
+      const filename = document.getElementById('filename').value; // Get desired filename
+  
+      // Construct the image URL with custom dimensions and filename as query parameters
+      const imageUrl = `/download?height=${height}&width=${width}&filename=${filename}`;
+  
+      // Create a hidden anchor element to trigger the download
+      const anchor = document.createElement('a');
+      anchor.style.display = 'none';
+      anchor.href = imageUrl;
+      anchor.download = filename; // Use the desired filename
+  
+      // Append the anchor to the document and simulate a click
+      document.body.appendChild(anchor);
+      anchor.click();
+      document.body.removeChild(anchor);
+    });
+  });
+  
+    </script>
+    
+</body>
+</html>
