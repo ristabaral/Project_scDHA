@@ -18,6 +18,8 @@ If you encounter any problem while attcahing R in your VScode, install languages
 install.packages("languageserver")
 library(languageserver) in your R
 
+After downloading the project, create files and images folder inside public to store file uploaded and the result.
+
 Please do wait for a while after submitting the input as it may take a little long time for processing the input data and showing the output.
 
 
